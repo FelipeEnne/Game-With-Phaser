@@ -16,11 +16,11 @@ export default class GameScene extends Phaser.Scene {
 
 
   preload () {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude', 'assets/dude.png', {
+    this.load.image('sky', 'assets/images/sky.png');
+    this.load.image('ground', 'assets/images/platform.png');
+    this.load.image('star', 'assets/images/star.png');
+    this.load.image('bomb', 'assets/images/bomb.png');
+    this.load.spritesheet('dude', 'assets/images/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
     });
@@ -30,7 +30,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.add.image(400, 300, 'sky');
   
-   platforms = this.physics.add.staticGroup();
+    platforms = this.physics.add.staticGroup();
   
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
   

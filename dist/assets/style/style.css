@@ -1,0 +1,12 @@
+body {
+    background: aliceblue;;
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    display: flex;
+    margin: auto;
+}

@@ -8,8 +8,10 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create () {
+    this.gameName = this.add.text(300, 100, 'Scape Game', { fontSize: '32px', fill: '#fff' });
+    
     // Game
-    this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
+    this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'PreGame');
 
     // Options
     this.optionsButton = new Button(this, config.width/2, config.height/2, 'blueButton1', 'blueButton2', 'Options', 'Options');
