@@ -1,0 +1,31 @@
+{
+  "name": "phaser3",
+  "version": "1.0.0",
+  "description": "A project starter for developing Phaser 3 games using Webpack and ES6.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-web": "npm install --save-dev webpack",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "npx-fix": "npx eslint src/  --fix",
+    "server": "node server.js"
+  },
+  "author": "Felipe Enne",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "babel-core": "6",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.0.0",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^3.4.2",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.0.0",
+    "express": "^4.17.1"
+  },
+  "dependencies": {
+    "phaser": "^3.0.0"
+  }
+}

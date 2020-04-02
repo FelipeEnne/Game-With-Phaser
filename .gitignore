@@ -1,0 +1,12 @@
+# System and IDE files
+Thumbs.db
+.DS_Store
+.idea
+*.suo
+
+
+# Vendors
+node_modules/
+
+# Build
+/npm-debug.log
