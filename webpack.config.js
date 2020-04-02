@@ -1,6 +1,5 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
+const webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -10,7 +9,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    filename: '[name].js'
   },
 
   module: {
@@ -25,11 +24,6 @@ module.exports = {
           }
         }
       },
-      {
-        test: /\.css$/i,
-        include: path.resolve(__dirname, 'assets/style'),
-        use: ['style-loader', 'css-loader'],
-      }
     ]
   },
 
