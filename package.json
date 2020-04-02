@@ -1,7 +1,7 @@
 {
-  "name": "phaser3",
+  "name": "game_with_phaser",
   "version": "1.0.0",
-  "description": "A project starter for developing Phaser 3 games using Webpack and ES6.",
+  "description": "A game Mario-style",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
