@@ -2,13 +2,46 @@
 /* eslint-disable no-undef */
 import 'phaser';
 
+
 let player;
 let cursors;
 let stars;
+
 let platforms;
+let platforms1;
+let logicPlatforms1 = 0;
+let platforms2;
+let logicPlatforms2 = 1;
+let platforms3;
+let logicPlatforms3 = 0;
+let platforms4;
+let logicPlatforms4 = 1;
+
 let score = 0;
 let scoreText;
 let bombs;
+
+const arrPlatformI = [];
+const arrPlatformX = [];
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function generatePlataformI(min, max) {
+  for (let i = 0; i < 5; i += 1) {
+    arrPlatformI.push(getRandomInt(min, max));
+  }
+}
+
+function generatePlataformX(min, max) {
+  for (let i = 0; i < 4; i += 1) {
+    arrPlatformX.push(getRandomInt(min, max));
+  }
+}
+
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -22,6 +55,10 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ground2', 'assets/images/platform2.png');
     this.load.image('ground3', 'assets/images/platform3.png');
     this.load.image('ground4', 'assets/images/platform4.png');
+    this.load.image('ground5', 'assets/images/platform5.png');
+    this.load.image('ground6', 'assets/images/platform6.png');
+    this.load.image('ground7', 'assets/images/platform7.png');
+    this.load.image('ground8', 'assets/images/platform8.png');
     this.load.image('star', 'assets/images/star.png');
     this.load.image('bomb', 'assets/images/bomb.png');
     this.load.spritesheet('boy', 'assets/images/redhairboy.png', {
@@ -31,18 +68,34 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    // main img
     this.add.image(400, 300, 'sky');
 
+    // plataform
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 568, 'ground1').setScale(2).refreshBody();
+    generatePlataformI(2, 8);
+    generatePlataformX(200, 600);
 
-    platforms.create(750, 480, 'ground2');
-    platforms.create(300, 450, 'ground3');
-    platforms.create(750, 350, 'ground4');
+    platforms.create(400, 580, 'ground1').setScale(2).refreshBody();
+    platforms.create(700, 150, `ground${arrPlatformI[4]}`);
 
 
-    player = this.physics.add.sprite(100, 450, 'boy');
+    platforms1 = this.physics.add.sprite(arrPlatformX[0], 470, `ground${arrPlatformI[0]}`);
+    platforms1.body.setAllowGravity(false);
+
+    platforms2 = this.physics.add.sprite(arrPlatformX[1], 390, `ground${arrPlatformI[1]}`);
+    platforms2.body.setAllowGravity(false);
+
+    platforms3 = this.physics.add.sprite(arrPlatformX[2], 310, `ground${arrPlatformI[2]}`);
+    platforms3.body.setAllowGravity(false);
+
+    platforms4 = this.physics.add.sprite(arrPlatformX[3], 230, `ground${arrPlatformI[3]}`);
+    platforms4.body.setAllowGravity(false);
+
+    // player
+    player = this.physics.add.sprite(25, 500, 'boy');
+
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
@@ -69,19 +122,54 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
 
+    function collideObjects() {
+      platforms1.setVelocityY(0);
+      platforms2.setVelocityY(0);
+      platforms3.setVelocityY(0);
+      platforms4.setVelocityY(0);
+      player.setVelocityY(0);
+    }
+
+    this.physics.add.collider(player, platforms1, collideObjects, null, this);
+    this.physics.add.collider(player, platforms2, collideObjects, null, this);
+    this.physics.add.collider(player, platforms3, collideObjects, null, this);
+    this.physics.add.collider(player, platforms4, collideObjects, null, this);
+
     cursors = this.input.keyboard.createCursorKeys();
 
     stars = this.physics.add.group({
       key: 'star',
-      repeat: 11,
+      repeat: 5,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
     stars.children.iterate((child) => {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      child.setBounceY(0);
     });
 
+    console.log(stars);
+
+    function collideObjectsStars1() {
+      platforms1.setVelocityY(-10);
+    }
+
+    function collideObjectsStars2() {
+      platforms2.setVelocityY(-10);
+    }
+
+    function collideObjectsStars3() {
+      platforms3.setVelocityY(-10);
+    }
+
+    function collideObjectsStars4() {
+      platforms4.setVelocityY(-10);
+    }
+
     this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(stars, platforms1, collideObjectsStars1, null, this);
+    this.physics.add.collider(stars, platforms2, collideObjectsStars2, null, this);
+    this.physics.add.collider(stars, platforms3, collideObjectsStars3, null, this);
+    this.physics.add.collider(stars, platforms4, collideObjectsStars4, null, this);
 
     // eslint-disable-next-line no-shadow
     function collectStar(player, star) {
@@ -126,6 +214,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, bombs, hitBomb, null, this);
   }
 
+
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
@@ -143,6 +232,57 @@ export default class GameScene extends Phaser.Scene {
 
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
+    }
+
+
+    if (platforms1.x < 800 && logicPlatforms1 === 0) {
+      platforms1.setVelocityX(120);
+      if (platforms1.x > 700) {
+        logicPlatforms1 = 1;
+      }
+    } else {
+      if (platforms1.x < 100) {
+        logicPlatforms1 = 0;
+      }
+      platforms1.setVelocityX(-120);
+    }
+
+
+    if (platforms2.x < 800 && logicPlatforms2 === 0) {
+      platforms2.setVelocityX(120);
+      if (platforms2.x > 700) {
+        logicPlatforms2 = 1;
+      }
+    } else {
+      if (platforms2.x < 100) {
+        logicPlatforms2 = 0;
+      }
+      platforms2.setVelocityX(-120);
+    }
+
+
+    if (platforms3.x < 800 && logicPlatforms3 === 0) {
+      platforms3.setVelocityX(120);
+      if (platforms3.x > 700) {
+        logicPlatforms3 = 1;
+      }
+    } else {
+      if (platforms3.x < 100) {
+        logicPlatforms3 = 0;
+      }
+      platforms3.setVelocityX(-120);
+    }
+
+    if (platforms4.x < 800 && logicPlatforms4 === 0) {
+      platforms4.setVelocityX(120);
+      if (platforms4.x > 700) {
+        logicPlatforms4 = 1;
+      }
+    } else {
+      if (platforms4.x < 100) {
+        logicPlatforms4 = 0;
+      }
+      platforms4.setVelocityX(-120);
     }
   }
 }
