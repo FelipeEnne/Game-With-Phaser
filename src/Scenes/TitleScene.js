@@ -10,7 +10,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.gameName = this.add.text(300, 100, 'Scape Game', { fontSize: '32px', fill: '#fff' });
+    this.gameName = this.add.text(220, 100, 'Climbing the Volcano', { fontSize: '32px', fill: '#fff' });
 
     // Game
     this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'PreGame');
@@ -24,7 +24,7 @@ export default class TitleScene extends Phaser.Scene {
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-      this.bgMusic.play();
+      //this.bgMusic.play();
       this.model.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
     }

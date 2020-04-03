@@ -9,10 +9,10 @@ export default class PreGameScene extends Phaser.Scene {
   }
 
   create() {
-    this.title = this.add.text(0, 0, 'Scape Game', { fontSize: '32px', fill: '#fff' });
-    this.gameContext1 = this.add.text(50, 150, 'You were playing in the forest you were kidnapped by bandits.', { fontSize: '17px', fill: '#fff' });
-    this.gameContext2 = this.add.text(50, 200, 'Luckily the bandit who was on guard slept and you managed to escape.', { fontSize: '17px', fill: '#fff' });
-    this.gameContext3 = this.add.text(50, 250, 'Now you must run away and find your way home.', { fontSize: '17px', fill: '#fff' });
+    this.title = this.add.text(0, 0, 'Climbing the Volcano', { fontSize: '32px', fill: '#fff' });
+    this.gameContext1 = this.add.text(50, 150, 'There is a magic volcano that throws money into the air.', { fontSize: '17px', fill: '#fff' });
+    this.gameContext2 = this.add.text(50, 200, 'You adventurer Red Hair is ready to climb the volcano and take the money', { fontSize: '17px', fill: '#fff' });
+    this.gameContext3 = this.add.text(50, 250, 'But be careful with the flames that the volcano throws', { fontSize: '17px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
