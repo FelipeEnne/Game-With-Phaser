@@ -1,15 +1,14 @@
 const path = require('path');
-const webpack = require('webpack')
 
 module.exports = {
   entry: {
     app: './src/index.js',
-    'production-dependencies': ['phaser']
+    'production-dependencies': ['phaser'],
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
 
   module: {
@@ -20,12 +19,12 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
-          }
-        }
+            presets: ['env'],
+          },
+        },
       },
-    ]
+    ],
   },
 
 
-}
+};
