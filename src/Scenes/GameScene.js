@@ -5,7 +5,7 @@ import 'phaser';
 
 let player;
 let cursors;
-let stars;
+let coins;
 
 let platforms;
 let platforms1;
@@ -23,11 +23,10 @@ let bombs;
 
 const arrPlatformI = [];
 const arrPlatformX = [];
+const arrCoinsXY = [];
 
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) + Math.ceil(min);
 }
 
 function generatePlataformI(min, max) {
@@ -39,6 +38,13 @@ function generatePlataformI(min, max) {
 function generatePlataformX(min, max) {
   for (let i = 0; i < 4; i += 1) {
     arrPlatformX.push(getRandomInt(min, max));
+  }
+}
+
+function generateCoinsXY(min, max) {
+  for (let i = 0; i < 5; i += 1) {
+    arrCoinsXY.push(getRandomInt(min, max));
+    arrCoinsXY.push(getRandomInt(min, max));
   }
 }
 
@@ -59,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ground6', 'assets/images/platform6.png');
     this.load.image('ground7', 'assets/images/platform7.png');
     this.load.image('ground8', 'assets/images/platform8.png');
-    this.load.image('star', 'assets/images/star.png');
+    this.load.image('coin', 'assets/images/coins.png');
     this.load.image('bomb', 'assets/images/bomb.png');
     this.load.spritesheet('boy', 'assets/images/redhairboy.png', {
       frameWidth: 32,
@@ -75,23 +81,30 @@ export default class GameScene extends Phaser.Scene {
     platforms = this.physics.add.staticGroup();
 
     generatePlataformI(2, 8);
+    // console.log(arrPlatformI);
+
     generatePlataformX(200, 600);
+    // console.log(arrPlatformX);
 
     platforms.create(400, 580, 'ground1').setScale(2).refreshBody();
-    platforms.create(700, 150, `ground${arrPlatformI[4]}`);
+    platforms.create(700, 150, `ground${arrPlatformI[0]}`);
 
 
-    platforms1 = this.physics.add.sprite(arrPlatformX[0], 470, `ground${arrPlatformI[0]}`);
+    platforms1 = this.physics.add.image(arrPlatformX[1], 470, `ground${arrPlatformI[0]}`);
     platforms1.body.setAllowGravity(false);
+    platforms1.setImmovable(true);
 
-    platforms2 = this.physics.add.sprite(arrPlatformX[1], 390, `ground${arrPlatformI[1]}`);
+    platforms2 = this.physics.add.image(arrPlatformX[2], 390, `ground${arrPlatformI[1]}`);
     platforms2.body.setAllowGravity(false);
+    platforms2.setImmovable(true);
 
-    platforms3 = this.physics.add.sprite(arrPlatformX[2], 310, `ground${arrPlatformI[2]}`);
+    platforms3 = this.physics.add.image(arrPlatformX[4], 310, `ground${arrPlatformI[2]}`);
     platforms3.body.setAllowGravity(false);
+    platforms3.setImmovable(true);
 
-    platforms4 = this.physics.add.sprite(arrPlatformX[3], 230, `ground${arrPlatformI[3]}`);
+    platforms4 = this.physics.add.image(arrPlatformX[3], 230, `ground${arrPlatformI[3]}`);
     platforms4.body.setAllowGravity(false);
+    platforms4.setImmovable(true);
 
     // player
     player = this.physics.add.sprite(25, 500, 'boy');
@@ -122,54 +135,35 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
 
-    function collideObjects() {
-      platforms1.setVelocityY(0);
-      platforms2.setVelocityY(0);
-      platforms3.setVelocityY(0);
-      platforms4.setVelocityY(0);
-      player.setVelocityY(0);
-    }
-
-    this.physics.add.collider(player, platforms1, collideObjects, null, this);
-    this.physics.add.collider(player, platforms2, collideObjects, null, this);
-    this.physics.add.collider(player, platforms3, collideObjects, null, this);
-    this.physics.add.collider(player, platforms4, collideObjects, null, this);
+    this.physics.add.collider(player, platforms1);
+    this.physics.add.collider(player, platforms2);
+    this.physics.add.collider(player, platforms3);
+    this.physics.add.collider(player, platforms4);
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    stars = this.physics.add.group({
-      key: 'star',
-      repeat: 5,
-      setXY: { x: 12, y: 0, stepX: 70 },
+    generateCoinsXY(200, 600);
+    console.log(arrCoinsXY);
+    coins = this.physics.add.group({
+      key: 'coin',
+      repeat: getRandomInt(2, 7),
+      setXY: {
+        x: getRandomInt(0, 200),
+        y: getRandomInt(0, 200),
+        stepY: getRandomInt(20, 40),
+        stepX: getRandomInt(50, 100),
+      },
     });
 
-    stars.children.iterate((child) => {
+    coins.children.iterate((child) => {
       child.setBounceY(0);
     });
 
-    console.log(stars);
-
-    function collideObjectsStars1() {
-      platforms1.setVelocityY(-10);
-    }
-
-    function collideObjectsStars2() {
-      platforms2.setVelocityY(-10);
-    }
-
-    function collideObjectsStars3() {
-      platforms3.setVelocityY(-10);
-    }
-
-    function collideObjectsStars4() {
-      platforms4.setVelocityY(-10);
-    }
-
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(stars, platforms1, collideObjectsStars1, null, this);
-    this.physics.add.collider(stars, platforms2, collideObjectsStars2, null, this);
-    this.physics.add.collider(stars, platforms3, collideObjectsStars3, null, this);
-    this.physics.add.collider(stars, platforms4, collideObjectsStars4, null, this);
+    this.physics.add.collider(coins, platforms);
+    this.physics.add.collider(coins, platforms1);
+    this.physics.add.collider(coins, platforms2);
+    this.physics.add.collider(coins, platforms3);
+    this.physics.add.collider(coins, platforms4);
 
     // eslint-disable-next-line no-shadow
     function collectStar(player, star) {
@@ -178,8 +172,8 @@ export default class GameScene extends Phaser.Scene {
       score += 10;
       scoreText.setText(`Score: ${score}`);
 
-      if (stars.countActive(true) === 0) {
-        stars.children.iterate((child) => {
+      if (coins.countActive(true) === 0) {
+        coins.children.iterate((child) => {
           child.enableBody(true, child.x, 0, true, true);
         });
 
@@ -192,7 +186,7 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
-    this.physics.add.overlap(player, stars, collectStar, null, this);
+    this.physics.add.overlap(player, coins, collectStar, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
@@ -217,11 +211,11 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     if (cursors.left.isDown) {
-      player.setVelocityX(-160);
+      player.setVelocityX(-300);
 
       player.anims.play('left', true);
     } else if (cursors.right.isDown) {
-      player.setVelocityX(160);
+      player.setVelocityX(300);
 
       player.anims.play('right', true);
     } else {
