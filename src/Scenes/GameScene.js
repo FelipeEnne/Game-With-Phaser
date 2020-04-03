@@ -132,12 +132,14 @@ export default class GameScene extends Phaser.Scene {
 
     coins.children.iterate((child) => {
       child.setBounceY(0);
+      child.setCollideWorldBounds(true);
     });
 
     function collideObjects() {
       coins.setVelocityX(0);
       // console.log('hit');
     }
+
 
     this.physics.add.collider(coins, platforms, collideObjects, null, this);
     this.physics.add.collider(coins, platforms1, collideObjects, null, this);
