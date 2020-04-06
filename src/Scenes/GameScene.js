@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 import 'phaser';
+import { storeGolds } from '../localStorage';
 
 let player;
 let cursors;
@@ -16,14 +17,16 @@ let logicPlatforms3 = 0;
 let platforms4;
 let logicPlatforms4 = 1;
 let platforms5;
-let logicPlatforms5 = 1;
+let logicPlatforms5 = 0;
 
-let score = 0;
-let scoreText;
+// eslint-disable-next-line import/no-mutable-exports
+let gold = 0;
+let goldText;
 let fires;
 
 const arrPlatformI = [];
 const arrPlatformX = [];
+
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) + Math.ceil(min);
@@ -47,8 +50,8 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-
   create() {
+    gold = 0;
     // main img
     this.add.image(400, 300, 'sky');
 
@@ -121,11 +124,10 @@ export default class GameScene extends Phaser.Scene {
     // coins
     coins = this.physics.add.group({
       key: 'coin',
-      repeat: getRandomInt(2, 7),
+      repeat: getRandomInt(4, 8),
       setXY: {
         x: getRandomInt(0, 200),
-        y: getRandomInt(0, 200),
-        stepY: getRandomInt(20, 40),
+        y: 0,
         stepX: getRandomInt(50, 100),
       },
     });
@@ -152,14 +154,15 @@ export default class GameScene extends Phaser.Scene {
     function collectStar(player, coin) {
       coin.disableBody(true, true);
 
-      score += 10;
-      scoreText.setText(`Score: ${score}`);
+      gold += 10;
+      goldText.setText(`Gold: ${gold}`);
 
       if (coins.countActive(true) === 0) {
         coins.children.iterate((child) => {
-          child.enableBody(true, child.x, 0, true, true);
+          child.enableBody(true, getRandomInt(0, 800), 0, true, true);
         });
-        for (let i = 0; i < Math.round(score / 100); i += 1) {
+        for (let i = 0; i < Math.round(gold / 100); i += 1) {
+        // for (let i = 0; i < 10; i += 1) {
           const fire = fires.create(Phaser.Math.Between(0, 800), 16, 'fire');
           fire.setBounce(0);
         }
@@ -168,21 +171,37 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.overlap(player, coins, collectStar, null, this);
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFF' });
+    goldText = this.add.text(16, 16, 'Gold: 0', { fontSize: '32px', fill: '#FFF' });
 
     fires = this.physics.add.group();
 
 
     // eslint-disable-next-line no-shadow
     function hitfire(player) {
+      storeGolds(gold);
       this.physics.pause();
-
+      player.setTint(0xff0000);
       player.anims.play('turn');
-
-      gameOver = true;
+      this.scene.start('gameOver');
     }
 
     this.physics.add.collider(player, fires, hitfire, null, this);
+  }
+
+
+  ready() {
+    this.load.on('complete', () => {
+      player.destroy();
+      platforms.destroy();
+      platforms1.destroy();
+      platforms2.destroy();
+      platforms3.destroy();
+      platforms4.destroy();
+      platforms5.destroy();
+      coins.destroy();
+      fires.destroy();
+      this.ready();
+    });
   }
 
 

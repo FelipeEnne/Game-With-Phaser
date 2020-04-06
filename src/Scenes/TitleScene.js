@@ -30,6 +30,17 @@ export default class TitleScene extends Phaser.Scene {
     }
   }
 
+  ready() {
+    this.load.on('complete', () => {
+      gameName.destroy();
+      gameButton.destroy();
+      optionsButton.destroy();
+      creditsButton.destroy();
+      this.ready();
+    });
+  }
+
+
   centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,

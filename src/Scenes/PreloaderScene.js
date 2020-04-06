@@ -99,14 +99,19 @@ export default class PreloaderScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 48,
     });
+    this.load.spritesheet('boyhit', 'assets/images/rsz_frame-got-hit.png', {
+      frameWidth: 32,
+      frameHeight: 48,
+    });
   }
 
   ready() {
-    this.scene.start('Game');
+    this.scene.start('gameOver');
+    // this.scene.start('Game');
     this.readyCount += 1;
     // console.log(this.readyCount);
     if (this.readyCount === 1) {
-      this.scene.start('Title');
+      // this.scene.start('Title');
     }
   }
 }
