@@ -4,7 +4,8 @@
   "description": "A game Mario-style",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "jest-watch": "jest --watch",
     "install-web": "npm install --save-dev webpack",
     "build": "webpack",
     "watch": "webpack --watch",
@@ -14,10 +15,30 @@
   "author": "Felipe Enne",
   "license": "MIT",
   "private": true,
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/test/mocks/styleMock.js",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/mocks/fileMock.js"
+    }
+  },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/runtime": "^7.9.2",
     "@types/babel-core": "^6.25.6",
     "babel-core": "^6.26.3",
+    "babel-jest": "^25.2.6",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-async-to-generator": "^6.5.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -31,17 +52,19 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "html-webpack-plugin": "^4.0.4",
+    "jest": "^25.2.7",
+    "jest-canvas-mock": "^2.2.0",
     "raw-loader": "^0.5.1",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.0.0"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "@babel/runtime": "^7.9.2",
     "phaser": "^3.0.0",
     "phaser3-rex-plugins": "^1.1.11"
   },
   "engines": {
     "node": "12.16"
-  }
+  },
+  "repository": "https://github.com/FelipeEnne/Game-With-Phaser.git"
 }
