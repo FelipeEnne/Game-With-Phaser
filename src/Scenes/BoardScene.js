@@ -72,4 +72,16 @@ export default class BoardScene extends Phaser.Scene {
       this.table = table;
     });
   }
+
+  ready() {
+    this.load.on('complete', () => {
+      this.table.destroy();
+      this.geralData.destroy();
+      this.optionsOverButton.destroy();
+      this.getScores.destroy();
+      this.gameOverButton.destroy();
+      this.gameOverGold.destroy();
+      this.ready();
+    });
+  }
 }

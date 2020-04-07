@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from 'phaser';
 import Button from '../Objects/Button';
 
 export default class OptionsScene extends Phaser.Scene {
@@ -30,12 +29,12 @@ export default class OptionsScene extends Phaser.Scene {
     if (this.model.musicOn === false) {
       this.musicButton.setTexture('box');
       this.sys.game.globals.bgMusic.stop();
-      this.model.bgMusicPlaying = true;
+      this.model.bgMusicPlaying = false;
     } else {
       this.musicButton.setTexture('checkedBox');
       if (this.model.bgMusicPlaying === false) {
         this.sys.game.globals.bgMusic.play();
-        this.model.bgMusicPlaying = false;
+        this.model.bgMusicPlaying = true;
       }
     }
   }

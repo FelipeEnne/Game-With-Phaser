@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import Phaser from 'phaser';
 import config from './Config/config';
 import PreGameScene from './Scenes/PreGameScene';
