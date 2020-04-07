@@ -103,10 +103,12 @@ export default class PreloaderScene extends Phaser.Scene {
       frameHeight: 48,
     });
     this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
+    this.load.plugin('rexgridtableplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js', true);
+    this.load.plugin('rexscrollerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscrollerplugin.min.js', true);
   }
 
   ready() {
-    this.scene.start('Board');
+    this.scene.start('Game');
     // this.scene.start('gameOver');
     // this.scene.start('Game');
     this.readyCount += 1;

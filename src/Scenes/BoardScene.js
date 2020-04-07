@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import Button from '../Objects/Button';
 import { getGoldBoard } from '../boardGold';
 
-const getScores = getGoldBoard();
 
 export default class BoardScene extends Phaser.Scene {
   constructor() {
@@ -10,26 +9,67 @@ export default class BoardScene extends Phaser.Scene {
   }
 
   create() {
-    console.log(getScores);
+    this.getScores = getGoldBoard();
+
     this.gameOverGold = this.add.text(280, 100, 'Overall Score', { fontSize: '32px', fill: '#fff' });
 
     this.gameOverButton = new Button(this, 650, 550, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
 
     this.optionsOverButton = new Button(this, 150, 550, 'blueButton1', 'blueButton2', 'Menu', 'Title');
 
-    let table = this.add.rexGridTable(x, y, width, height, config);
+    this.geralData = [];
 
-    this.getItems = (count, score) => {
-      const data = ['Rank', 'User', 'Score'];
+    this.getItems = (score) => {
+      let data = [];
+      let i = 0;
 
-      for (let i = 0; i < count; i += 1) {
+      while (score[i] !== undefined) {
+        console.log(score[i]);
         if (score[i]) {
-          data.push(i + 1);
-          data.push(score[i][1]);
           data.push(score[i][0]);
+          data.push(score[i][1]);
+          this.geralData.push(data);
         }
+        i += 1;
       }
       return data;
     };
+
+    this.getScores.then((scores) => {
+
+      this.getItems(scores);
+      console.log(this.geralData);
+
+    });
+
+    const newCellObject = (scene, cell) => {
+      const bg = scene.add.graphics()
+        .fillStyle(0x555555)
+        .fillRect(2, 2, 200 - 2, 50 - 2);
+      const txt = scene.add.text(10, 20, cell.index);
+      const txt1 = scene.add.text(10, 20, cell.index);
+      const container = scene.add.container(0, 0, [bg, txt, txt1]);
+      return container;
+    };
+
+    const onCellVisible = function (cell) {
+      cell.setContainer(newCellObject(this, cell));
+      //console.log('Cell ' + cell.index + ' visible');
+    };
+
+    const table = this.add.rexGridTable(425, 300, 250, 300, {
+      cellWidth: 200,
+      cellHeight: 50,
+      cellsCount: 20,
+      columns: 1,
+      cellVisibleCallback: onCellVisible.bind(this),
+      clamplTableOXY: false,
+    });
+
+
+    this.table = table;
+    this.scrollerState = this.add.text(0, 0, '');
   }
+
+
 }

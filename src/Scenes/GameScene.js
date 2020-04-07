@@ -19,7 +19,7 @@ let platforms5;
 let logicPlatforms5 = 0;
 
 // eslint-disable-next-line import/no-mutable-exports
-let gold = 0;
+let gold;
 let goldText;
 let fires;
 
@@ -160,8 +160,8 @@ export default class GameScene extends Phaser.Scene {
         coins.children.iterate((child) => {
           child.enableBody(true, getRandomInt(0, 800), 0, true, true);
         });
-        for (let i = 0; i < Math.round(gold / 100); i += 1) {
-        // for (let i = 0; i < 10; i += 1) {
+        //for (let i = 0; i < Math.round(gold / 100); i += 1) {
+        for (let i = 0; i < 10; i += 1) {
           const fire = fires.create(Phaser.Math.Between(0, 800), 16, 'fire');
           fire.setBounce(0);
         }
