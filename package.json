@@ -40,5 +40,8 @@
     "@babel/runtime": "^7.9.2",
     "phaser": "^3.0.0",
     "phaser3-rex-plugins": "^1.1.11"
+  },
+  "engines": {
+    "node": "12.16"
   }
 }
