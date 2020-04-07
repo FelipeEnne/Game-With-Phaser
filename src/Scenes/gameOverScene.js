@@ -3,7 +3,6 @@ import Button from '../Objects/Button';
 import { getLocalGolds } from '../localStorage';
 import { submitGold } from '../boardGold';
 
-const gold = getLocalGolds();
 
 export default class gameOverScene extends Phaser.Scene {
   constructor() {
@@ -11,6 +10,8 @@ export default class gameOverScene extends Phaser.Scene {
   }
 
   create() {
+    const gold = getLocalGolds();
+
     this.gameOverhistory = this.add.text(40, 50, 'You were hurt by the fireball and had to go back to your home.', { fontSize: '20px', fill: '#fff' });
 
     this.gameOverGold = this.add.text(200, 200, `You collected ${gold} golds`, { fontSize: '32px', fill: '#fff' });
@@ -24,7 +25,7 @@ export default class gameOverScene extends Phaser.Scene {
 
     const div = document.createElement('div');
     div.innerHTML = `
-      <input type="text" id="Name" placeholder="Your name" style="font-size: 20px"><br>
+      <input type="text" id="Name" placeholder="Your name" style="font-size: 20px" max="10" min="1"><br>
       <input type="button" name="submit" value="Submit your Score" style="font-size: 20px">
     `;
 
@@ -40,7 +41,7 @@ export default class gameOverScene extends Phaser.Scene {
           this.Name = inputText.value;
           this.submit = submitGold(this.Name, gold);
           this.submit.then(() => {
-            this.scene.start('BoardSecene');
+            this.scene.start('Board');
           });
         }
       }
