@@ -3,7 +3,10 @@ import 'phaser';
 
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
+  parent: 'divId',
+  dom: {
+    createContainer: true,
+  },
   width: 800,
   height: 600,
   physics: {

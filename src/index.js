@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
-import 'phaser';
+import Phaser from 'phaser';
 import config from './Config/config';
 import PreGameScene from './Scenes/PreGameScene';
 import GameScene from './Scenes/GameScene';
 import gameOverScene from './Scenes/gameOverScene';
+import BoardScene from './Scenes/BoardScene';
 import BootScene from './Scenes/BootScene';
 import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
@@ -24,6 +25,7 @@ class Game extends Phaser.Game {
     this.scene.add('PreGame', PreGameScene);
     this.scene.add('Game', GameScene);
     this.scene.add('gameOver', gameOverScene);
+    this.scene.add('Board', BoardScene);
     this.scene.start('Boot');
   }
 }

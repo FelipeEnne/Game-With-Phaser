@@ -1,8 +1,9 @@
-/* eslint-disable no-undef */
-import 'phaser';
+import Phaser from 'phaser';
 import Button from '../Objects/Button';
 import { getLocalGolds } from '../localStorage';
+import { submitGold } from '../boardGold';
 
+const gold = getLocalGolds()[0];
 
 export default class gameOverScene extends Phaser.Scene {
   constructor() {
@@ -12,7 +13,7 @@ export default class gameOverScene extends Phaser.Scene {
   create() {
     this.gameOverhistory = this.add.text(40, 50, 'You were hurt by the fireball and had to go back to your home.', { fontSize: '20px', fill: '#fff' });
 
-    this.gameOverGold = this.add.text(200, 200, `You collected ${getLocalGolds()[0]} golds`, { fontSize: '32px', fill: '#fff' });
+    this.gameOverGold = this.add.text(200, 200, `You collected ${gold} golds`, { fontSize: '32px', fill: '#fff' });
 
     this.gameOverButton = new Button(this, 650, 550, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
 
@@ -22,24 +23,24 @@ export default class gameOverScene extends Phaser.Scene {
     this.userName = '';
 
     const div = document.createElement('div');
-    div.innerHTML = `<div style="height:100px width: 200px background-color: white;" >
-      <input type="text" id="name" placeholder="Your name" style="font-size: 15px width: 200px"><br>
-      <input type="button" name="submitButton" value="Submit Score" style="font-size: 15px"></div>
+    div.innerHTML = `
+      <input type="text" id="Name" placeholder="Your name" style="font-size: 20px"><br>
+      <input type="button" name="submit" value="Submit" style="font-size: 20px">
     `;
 
-    const element = this.add.dom(400, 480, div);
+    const element = this.add.dom(600, 300, div);
     element.addListener('click');
 
     element.on('click', (event) => {
-      if (event.target.name === 'submitButton') {
-        const inputText = document.getElementById('nameField');
+      if (event.target.name === 'submit') {
+        const inputText = document.getElementById('Name');
         if (inputText.value !== '') {
           element.removeListener('click');
           element.setVisible(false);
-          this.userName = inputText.value;
-          this.submit = submitHighScore(this.userName, this.scores[0]);
+          this.Name = inputText.value;
+          this.submit = submitGold(this.Name, gold);
           this.submit.then(() => {
-            this.scene.start('SceneLeaderBoard');
+            this.scene.start('BoardSecene');
           });
         }
       }
@@ -48,10 +49,11 @@ export default class gameOverScene extends Phaser.Scene {
 
   ready() {
     this.load.on('complete', () => {
-      gameOverhistory.destroy();
-      gameOverGold.destroy();
-      gameOverButton.destroy();
-      optionsOverButton.destroy();
+      this.gameOverhistory.destroy();
+      this.gameOverGold.destroy();
+      this.gameOverButton.destroy();
+      this.optionsOverButton.destroy();
+      this.element.destroy();
       this.ready();
     });
   }
