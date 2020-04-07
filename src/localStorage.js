@@ -16,7 +16,6 @@ function getLocalGolds() {
 function storeGolds(gold) {
   const localGold = getLocalGolds();
   localGold[0] = gold;
-  localGold[1] = Math.max(...localGold);
   localStoreGold(localGold);
 }
 

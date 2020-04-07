@@ -17,7 +17,7 @@ async function initGame() {
 
   return answer;
 }
-///*
+
 async function submitGold(Name, Value) {
   const submit = {
     user: Name,
@@ -62,4 +62,3 @@ async function getGoldBoard() {
 }
 
 export { submitGold, getGoldBoard, initGame };
-//*/

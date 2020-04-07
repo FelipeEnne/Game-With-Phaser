@@ -18,4 +18,13 @@ export default {
       debug: false,
     },
   },
+  plugins: {
+    global: [{
+      key: 'rexGridTablePlugin',
+      plugin: GridTablePlugin,
+      start: true,
+    },
+    // ...
+    ],
+  },
 };
