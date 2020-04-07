@@ -1,6 +1,3 @@
-require('babel-core/register');
-require('babel-polyfill');
-
 async function initGame() {
   const game = {
     name: 'Climbing the Volcano',
@@ -24,7 +21,7 @@ async function initGame() {
 async function submitGold(Name, Value) {
   const submit = {
     user: Name,
-    gold: Value,
+    score: Value,
   };
   const post = JSON.stringify(submit);
   const address = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/91a9adf7a98b4b8490c6689a10fedb2f/scores/';

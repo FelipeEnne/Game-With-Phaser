@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { getGoldBoard } from '../boardGold';
 
+let getScores = getGoldBoard();
 
 export default class BoardScene extends Phaser.Scene {
   constructor() {
@@ -8,6 +9,6 @@ export default class BoardScene extends Phaser.Scene {
   }
 
   create() {
-    console.log(getGoldBoard);
+    console.log(getScores);
   }
 }
