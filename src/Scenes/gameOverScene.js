@@ -9,6 +9,15 @@ export default class gameOverScene extends Phaser.Scene {
     super('gameOver');
   }
 
+  preload() {
+    let url;
+
+    url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js';
+    this.load.plugin('rexgridtableplugin', url, true);
+    url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscrollerplugin.min.js';
+    this.load.plugin('rexscrollerplugin', url, true); 
+}
+
   create() {
     const gold = getLocalGolds();
 

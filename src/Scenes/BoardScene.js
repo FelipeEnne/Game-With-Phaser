@@ -11,7 +11,7 @@ export default class BoardScene extends Phaser.Scene {
   create() {
     this.getScores = getGoldBoard();
 
-    this.gameOverGold = this.add.text(280, 100, 'Overall Score', { fontSize: '32px', fill: '#fff' });
+    this.gameOverGold = this.add.text(280, 50, 'Top 10 Scores', { fontSize: '32px', fill: '#fff' });
 
     this.gameOverButton = new Button(this, 650, 550, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
 
@@ -38,40 +38,38 @@ export default class BoardScene extends Phaser.Scene {
     this.getScores.then((scores) => {
       this.geralData.push(this.getItems(scores));
 
-
       let i = 1;
+      let container;
       const newCellObject = (scene, cell) => {
         const bg = scene.add.graphics()
           .fillStyle(0x555555)
-          .fillRect(2, 2, 200 - 2, 50 - 2);
+          .fillRect(2, 2, 200 - 2, 40 - 2);
         const txt = scene.add.text(10, 20, cell.index + 1);
-
-        const txt1 = scene.add.text(150, 20, this.geralData[0][i - 1]);
-        const txt2 = scene.add.text(30, 20, this.geralData[0][i].substring(0, 10));
-        const container = scene.add.container(0, 0, [bg, txt, txt1, txt2]);
+        if (this.geralData[0][i - 1] !== undefined) {
+          const txt1 = scene.add.text(150, 20, this.geralData[0][i - 1]);
+          const txt2 = scene.add.text(30, 20, this.geralData[0][i].substring(0, 10));
+          container = scene.add.container(0, 0, [bg, txt, txt1, txt2]);
+        } else {
+          container = scene.add.container(0, 0, [bg, txt]);
+        }
         i += 2;
         return container;
       };
 
-      const onCellVisible = function (cell) {
+      const onCellVisible = (cell) => {
         cell.setContainer(newCellObject(this, cell));
       };
 
-      table = this.add.rexGridTable(425, 300, 250, 300, {
+      table = this.add.rexGridTable(425, 300, 250, 405, {
         cellWidth: 200,
-        cellHeight: 50,
-        cellsCount: 20,
+        cellHeight: 40,
+        cellsCount: 10,
         columns: 1,
         cellVisibleCallback: onCellVisible.bind(this),
         clamplTableOXY: false,
       });
 
+      this.table = table;
     });
-
-
-    this.table = table;
-    this.scrollerState = this.add.text(0, 0, '');
   }
-
-
 }
