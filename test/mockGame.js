@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import config from '../src/Config/config';
 import PreGameScene from '../src/Scenes/PreGameScene';

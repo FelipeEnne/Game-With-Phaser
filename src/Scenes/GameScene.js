@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import { storeGolds } from '../localStorage';
 
@@ -18,7 +19,6 @@ let logicPlatforms4 = 1;
 let platforms5;
 let logicPlatforms5 = 0;
 
-// eslint-disable-next-line import/no-mutable-exports
 let gold;
 let goldText;
 let fires;

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 import Phaser from 'phaser';
 import config from '../Config/config';
 
@@ -78,6 +78,7 @@ export default class PreGameScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 5000,
+      // eslint-disable-next-line func-names
       onComplete: function () {
         this.madeByTween.destroy;
         this.scene.start('Game');
