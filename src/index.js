@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import './style/style.css';
+import './assets/style/style.css';
 import Phaser from 'phaser';
 import config from './Config/config';
 import PreGameScene from './Scenes/PreGameScene';
