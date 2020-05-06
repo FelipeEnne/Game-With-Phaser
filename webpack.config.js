@@ -10,4 +10,21 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insert: 'body',
+            },
+          },
+          'css-loader',
+        ],
+      },
+    ],
+  },
 };
