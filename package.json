@@ -62,6 +62,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
     "phaser": "^3.0.0",
     "phaser3-rex-plugins": "^1.1.11"
   },
