@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const fetch = require('node-fetch');
 
 async function initGame() {

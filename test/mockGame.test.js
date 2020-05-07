@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import game from './mockGame';
 
 describe('Tests Start Mock Game', () => {
