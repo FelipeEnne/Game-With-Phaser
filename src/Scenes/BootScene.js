@@ -1,15 +1,12 @@
-import 'phaser';
+/* eslint-disable import/no-unresolved */
+import Phaser from 'phaser';
 
 export default class BootScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Boot');
   }
 
-  preload () {
-    this.load.image('logo', 'assets/zenva_logo.png');
-  }
-
-  create () {
+  create() {
     this.scene.start('Preloader');
   }
-};
+}

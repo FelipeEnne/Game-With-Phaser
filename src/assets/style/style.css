@@ -1,0 +1,35 @@
+body {
+    background: aliceblue;;
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    display: flex;
+    margin: auto;
+}
+
+.pinClipart {
+    height: 60px;
+    width: 85px;
+}
+
+.coin {
+    width: 60px;
+}
+
+.fire {
+    width: 32px;
+}
+
+.intruction {
+    font-size: 20px;
+    font-weight: bold;
+    width: 40%;
+    display: flex;
+    margin: 22px auto;
+    justify-content: space-between;
+    text-align: center;
+}
