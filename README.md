@@ -13,6 +13,7 @@
 * [Run This App on your computer](#run-this-app-on-your-computer)
 * [Run This App Online](#run-this-app-online)
 * [Scenes](#scenes)
+* [Future work](#future-work)
 * [License](#license)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
@@ -32,7 +33,7 @@ In this game we aim to collect the coins while escaping the volcano fire.
 * HTML
 * CSS
 * Git
-* Github
+* GitHub
 * JavaScript
 * API
 * Phaser
@@ -76,6 +77,10 @@ When you are finished you can add your name and see if you are in the top 10.
 
 <h3>Top 10</h3>
 <img src="./dist/assets/images/scene5.png" alt="img" />
+
+## Future work
+
+* Create a boss who will give you many coins
 
 ## License
 
