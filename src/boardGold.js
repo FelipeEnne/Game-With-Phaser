@@ -1,14 +1,15 @@
 async function initGame() {
   const game = {
-    name: 'Climbing the Volcano',
+    name: "Climbing the Volcano",
   };
   const post = JSON.stringify(game);
-  const address = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
+  const address =
+    "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/";
   const settings = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: post,
   };
@@ -24,12 +25,13 @@ async function submitGold(Name, Value) {
     score: Value,
   };
   const post = JSON.stringify(submit);
-  const address = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/91a9adf7a98b4b8490c6689a10fedb2f/scores/';
+  const address =
+    "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/91a9adf7a98b4b8490c6689a10fedb2f/scores/";
   const settings = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: post,
   };
@@ -47,12 +49,13 @@ function sorting(obj) {
 }
 
 async function getGoldBoard() {
-  const address = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/91a9adf7a98b4b8490c6689a10fedb2f/scores/';
+  const address =
+    "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/91a9adf7a98b4b8490c6689a10fedb2f/scores/";
   const settings = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   };
   const response = await fetch(address, settings);

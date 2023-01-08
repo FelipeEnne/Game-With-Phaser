@@ -1,14 +1,14 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: {
-    app: './src/index.js',
-    'production-dependencies': ['phaser'],
+    app: "./src/index.js",
+    "production-dependencies": ["phaser"],
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
   },
 
   module: {
@@ -17,19 +17,19 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
-              insert: 'body',
+              insert: "body",
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },

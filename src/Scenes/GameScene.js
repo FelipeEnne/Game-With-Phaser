@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/no-unresolved */
-import Phaser from 'phaser';
-import { storeGolds } from '../localStorage';
+import Phaser from "phaser";
+import { storeGolds } from "../localStorage";
 
 let player;
 let cursors;
@@ -26,9 +26,11 @@ let fires;
 const arrPlatformI = [];
 const arrPlatformX = [];
 
-
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) + Math.ceil(min);
+  return (
+    Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) +
+    Math.ceil(min)
+  );
 }
 
 function generatePlataformI(min, max) {
@@ -43,16 +45,15 @@ function generatePlataformX(min, max) {
   }
 }
 
-
 export default class GameScene extends Phaser.Scene {
   constructor() {
-    super('Game');
+    super("Game");
   }
 
   create() {
     gold = 0;
     // main img
-    this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, "sky");
 
     // plataform
     platforms = this.physics.add.staticGroup();
@@ -61,51 +62,70 @@ export default class GameScene extends Phaser.Scene {
 
     generatePlataformX(200, 600);
 
-    platforms.create(400, 580, 'ground1').setScale(2).refreshBody();
+    platforms.create(400, 580, "ground1").setScale(2).refreshBody();
 
-    platforms1 = this.physics.add.image(arrPlatformX[0], 470, `ground${arrPlatformI[0]}`);
+    platforms1 = this.physics.add.image(
+      arrPlatformX[0],
+      470,
+      `ground${arrPlatformI[0]}`
+    );
     platforms1.body.setAllowGravity(false);
     platforms1.setImmovable(true);
 
-    platforms2 = this.physics.add.image(arrPlatformX[1], 390, `ground${arrPlatformI[1]}`);
+    platforms2 = this.physics.add.image(
+      arrPlatformX[1],
+      390,
+      `ground${arrPlatformI[1]}`
+    );
     platforms2.body.setAllowGravity(false);
     platforms2.setImmovable(true);
 
-    platforms3 = this.physics.add.image(arrPlatformX[2], 310, `ground${arrPlatformI[2]}`);
+    platforms3 = this.physics.add.image(
+      arrPlatformX[2],
+      310,
+      `ground${arrPlatformI[2]}`
+    );
     platforms3.body.setAllowGravity(false);
     platforms3.setImmovable(true);
 
-    platforms4 = this.physics.add.image(arrPlatformX[3], 230, `ground${arrPlatformI[3]}`);
+    platforms4 = this.physics.add.image(
+      arrPlatformX[3],
+      230,
+      `ground${arrPlatformI[3]}`
+    );
     platforms4.body.setAllowGravity(false);
     platforms4.setImmovable(true);
 
-    platforms5 = this.physics.add.image(arrPlatformX[4], 150, `ground${arrPlatformI[4]}`);
+    platforms5 = this.physics.add.image(
+      arrPlatformX[4],
+      150,
+      `ground${arrPlatformI[4]}`
+    );
     platforms5.body.setAllowGravity(false);
     platforms5.setImmovable(true);
 
     // player
-    player = this.physics.add.sprite(25, 500, 'boy');
-
+    player = this.physics.add.sprite(25, 500, "boy");
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
     this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('boy', { start: 0, end: 3 }),
+      key: "left",
+      frames: this.anims.generateFrameNumbers("boy", { start: 0, end: 3 }),
       frameRate: 10,
       repeat: -1,
     });
 
     this.anims.create({
-      key: 'turn',
-      frames: [{ key: 'boy', frame: 4 }],
+      key: "turn",
+      frames: [{ key: "boy", frame: 4 }],
       frameRate: 20,
     });
 
     this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('boy', { start: 5, end: 8 }),
+      key: "right",
+      frames: this.anims.generateFrameNumbers("boy", { start: 5, end: 8 }),
       frameRate: 10,
       repeat: -1,
     });
@@ -122,7 +142,7 @@ export default class GameScene extends Phaser.Scene {
 
     // coins
     coins = this.physics.add.group({
-      key: 'coin',
+      key: "coin",
       repeat: getRandomInt(4, 8),
       setXY: {
         x: getRandomInt(0, 200),
@@ -140,7 +160,6 @@ export default class GameScene extends Phaser.Scene {
       coins.setVelocityX(0);
       // console.log('hit');
     }
-
 
     this.physics.add.collider(coins, platforms, collideObjects, null, this);
     this.physics.add.collider(coins, platforms1, collideObjects, null, this);
@@ -161,8 +180,8 @@ export default class GameScene extends Phaser.Scene {
           child.enableBody(true, getRandomInt(0, 800), 0, true, true);
         });
         for (let i = 0; i < Math.round(gold / 100); i += 1) {
-        // for (let i = 0; i < 10; i += 1) {
-          const fire = fires.create(Phaser.Math.Between(0, 800), 16, 'fire');
+          // for (let i = 0; i < 10; i += 1) {
+          const fire = fires.create(Phaser.Math.Between(0, 800), 16, "fire");
           fire.setBounce(0);
         }
       }
@@ -170,26 +189,27 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.overlap(player, coins, collectStar, null, this);
 
-    goldText = this.add.text(16, 16, 'Gold: 0', { fontSize: '32px', fill: '#FFF' });
+    goldText = this.add.text(16, 16, "Gold: 0", {
+      fontSize: "32px",
+      fill: "#FFF",
+    });
 
     fires = this.physics.add.group();
-
 
     // eslint-disable-next-line no-shadow
     function hitfire(player) {
       storeGolds(gold);
       this.physics.pause();
       player.setTint(0xff0000);
-      player.anims.play('turn');
-      this.scene.start('gameOver');
+      player.anims.play("turn");
+      this.scene.start("gameOver");
     }
 
     this.physics.add.collider(player, fires, hitfire, null, this);
   }
 
-
   ready() {
-    this.load.on('complete', () => {
+    this.load.on("complete", () => {
       player.destroy();
       platforms.destroy();
       platforms1.destroy();
@@ -203,26 +223,24 @@ export default class GameScene extends Phaser.Scene {
     });
   }
 
-
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-300);
 
-      player.anims.play('left', true);
+      player.anims.play("left", true);
     } else if (cursors.right.isDown) {
       player.setVelocityX(300);
 
-      player.anims.play('right', true);
+      player.anims.play("right", true);
     } else {
       player.setVelocityX(0);
 
-      player.anims.play('turn');
+      player.anims.play("turn");
     }
 
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
-
 
     if (platforms1.x < 800 && logicPlatforms1 === 0) {
       platforms1.setVelocityX(120);
@@ -236,7 +254,6 @@ export default class GameScene extends Phaser.Scene {
       platforms1.setVelocityX(-150);
     }
 
-
     if (platforms2.x < 800 && logicPlatforms2 === 0) {
       platforms2.setVelocityX(150);
       if (platforms2.x > 700) {
@@ -248,7 +265,6 @@ export default class GameScene extends Phaser.Scene {
       }
       platforms2.setVelocityX(-120);
     }
-
 
     if (platforms3.x < 800 && logicPlatforms3 === 0) {
       platforms3.setVelocityX(120);

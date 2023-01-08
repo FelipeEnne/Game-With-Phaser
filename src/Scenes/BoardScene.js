@@ -1,22 +1,40 @@
 /* eslint-disable import/no-unresolved */
-import Phaser from 'phaser';
-import Button from '../Objects/Button';
-import { getGoldBoard } from '../boardGold';
-
+import Phaser from "phaser";
+import Button from "../Objects/Button";
+import { getGoldBoard } from "../boardGold";
 
 export default class BoardScene extends Phaser.Scene {
   constructor() {
-    super('Board');
+    super("Board");
   }
 
   create() {
     this.getScores = getGoldBoard();
 
-    this.gameOverGold = this.add.text(280, 50, 'Top 10 Scores', { fontSize: '32px', fill: '#fff' });
+    this.gameOverGold = this.add.text(280, 50, "Top 10 Scores", {
+      fontSize: "32px",
+      fill: "#fff",
+    });
 
-    this.gameOverButton = new Button(this, 650, 550, 'blueButton1', 'blueButton2', 'Play Again', 'Game');
+    this.gameOverButton = new Button(
+      this,
+      650,
+      550,
+      "blueButton1",
+      "blueButton2",
+      "Play Again",
+      "Game"
+    );
 
-    this.optionsOverButton = new Button(this, 150, 550, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    this.optionsOverButton = new Button(
+      this,
+      150,
+      550,
+      "blueButton1",
+      "blueButton2",
+      "Menu",
+      "Title"
+    );
 
     this.geralData = [];
 
@@ -42,13 +60,18 @@ export default class BoardScene extends Phaser.Scene {
       let i = 1;
       let container;
       const newCellObject = (scene, cell) => {
-        const bg = scene.add.graphics()
+        const bg = scene.add
+          .graphics()
           .fillStyle(0x555555)
           .fillRect(2, 2, 200 - 2, 40 - 2);
         const txt = scene.add.text(10, 20, cell.index + 1);
         if (this.geralData[0][i - 1] !== undefined) {
           const txt1 = scene.add.text(150, 20, this.geralData[0][i - 1]);
-          const txt2 = scene.add.text(30, 20, this.geralData[0][i].substring(0, 10));
+          const txt2 = scene.add.text(
+            30,
+            20,
+            this.geralData[0][i].substring(0, 10)
+          );
           container = scene.add.container(0, 0, [bg, txt, txt1, txt2]);
         } else {
           container = scene.add.container(0, 0, [bg, txt]);
@@ -75,7 +98,7 @@ export default class BoardScene extends Phaser.Scene {
   }
 
   ready() {
-    this.load.on('complete', () => {
+    this.load.on("complete", () => {
       this.table.destroy();
       this.geralData.destroy();
       this.optionsOverButton.destroy();

@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
-    super('Preloader');
+    super("Preloader");
   }
 
   init() {
@@ -22,10 +22,10 @@ export default class PreloaderScene extends Phaser.Scene {
     const loadingText = this.make.text({
       x: width / 2,
       y: height / 2 - 50,
-      text: 'Loading...',
+      text: "Loading...",
       style: {
-        font: '20px monospace',
-        fill: '#ffffff',
+        font: "20px monospace",
+        fill: "#ffffff",
       },
     });
     loadingText.setOrigin(0.5, 0.5);
@@ -33,10 +33,10 @@ export default class PreloaderScene extends Phaser.Scene {
     const percentText = this.make.text({
       x: width / 2,
       y: height / 2 - 5,
-      text: '0%',
+      text: "0%",
       style: {
-        font: '18px monospace',
-        fill: '#ffffff',
+        font: "18px monospace",
+        fill: "#ffffff",
       },
     });
     percentText.setOrigin(0.5, 0.5);
@@ -44,16 +44,16 @@ export default class PreloaderScene extends Phaser.Scene {
     const assetText = this.make.text({
       x: width / 2,
       y: height / 2 + 50,
-      text: '',
+      text: "",
       style: {
-        font: '18px monospace',
-        fill: '#ffffff',
+        font: "18px monospace",
+        fill: "#ffffff",
       },
     });
     assetText.setOrigin(0.5, 0.5);
 
     // update progress bar
-    this.load.on('progress', (value) => {
+    this.load.on("progress", (value) => {
       // eslint-disable-next-line radix
       percentText.setText(`${parseInt(value * 100)}%`);
       progressBar.clear();
@@ -62,12 +62,12 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     // update file progress text
-    this.load.on('fileprogress', (file) => {
+    this.load.on("fileprogress", (file) => {
       assetText.setText(`Loading asset: ${file.key}`);
     });
 
     // remove progress bar when complete
-    this.load.on('complete', () => {
+    this.load.on("complete", () => {
       progressBar.destroy();
       progressBox.destroy();
       loadingText.destroy();
@@ -79,33 +79,45 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load assets needed in our game
-    this.load.image('blueButton1', 'assets/images/menu/blue_button02.png');
-    this.load.image('blueButton2', 'assets/images/menu/blue_button03.png');
-    this.load.image('box', 'assets/images/menu/grey_box.png');
-    this.load.image('checkedBox', 'assets/images/menu/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['assets/music/Theme.mp3']);
-    this.load.image('sky', 'assets/images/sky.png');
-    this.load.image('ground1', 'assets/images/platform1.png');
-    this.load.image('ground2', 'assets/images/platform2.png');
-    this.load.image('ground3', 'assets/images/platform3.png');
-    this.load.image('ground4', 'assets/images/platform4.png');
-    this.load.image('ground5', 'assets/images/platform5.png');
-    this.load.image('ground6', 'assets/images/platform6.png');
-    this.load.image('ground7', 'assets/images/platform7.png');
-    this.load.image('ground8', 'assets/images/platform8.png');
-    this.load.image('coin', 'assets/images/coins.png');
-    this.load.image('fire', 'assets/images/fire.png');
-    this.load.spritesheet('boy', 'assets/images/redhairboy.png', {
+    this.load.image("blueButton1", "assets/images/menu/blue_button02.png");
+    this.load.image("blueButton2", "assets/images/menu/blue_button03.png");
+    this.load.image("box", "assets/images/menu/grey_box.png");
+    this.load.image("checkedBox", "assets/images/menu/blue_boxCheckmark.png");
+    this.load.audio("bgMusic", ["assets/music/Theme.mp3"]);
+    this.load.image("sky", "assets/images/sky.png");
+    this.load.image("ground1", "assets/images/platform1.png");
+    this.load.image("ground2", "assets/images/platform2.png");
+    this.load.image("ground3", "assets/images/platform3.png");
+    this.load.image("ground4", "assets/images/platform4.png");
+    this.load.image("ground5", "assets/images/platform5.png");
+    this.load.image("ground6", "assets/images/platform6.png");
+    this.load.image("ground7", "assets/images/platform7.png");
+    this.load.image("ground8", "assets/images/platform8.png");
+    this.load.image("coin", "assets/images/coins.png");
+    this.load.image("fire", "assets/images/fire.png");
+    this.load.spritesheet("boy", "assets/images/redhairboy.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.spritesheet('boyhit', 'assets/images/rsz_frame-got-hit.png', {
+    this.load.spritesheet("boyhit", "assets/images/rsz_frame-got-hit.png", {
       frameWidth: 32,
       frameHeight: 48,
     });
-    this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
-    this.load.plugin('rexgridtableplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js', true);
-    this.load.plugin('rexscrollerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscrollerplugin.min.js', true);
+    this.load.plugin(
+      "rexinputtextplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js",
+      true
+    );
+    this.load.plugin(
+      "rexgridtableplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js",
+      true
+    );
+    this.load.plugin(
+      "rexscrollerplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscrollerplugin.min.js",
+      true
+    );
   }
 
   ready() {
@@ -116,7 +128,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.readyCount += 1;
     // console.log(this.readyCount);
     if (this.readyCount === 1) {
-      this.scene.start('Title');
+      this.scene.start("Title");
     }
   }
 }
