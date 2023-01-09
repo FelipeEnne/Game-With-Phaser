@@ -16,8 +16,12 @@
       "dest": "server.js"
     }, 
     {
-      "src": "/(.+)",
-      "dest": "dist/$1"
+      "src": "/",
+      "dest": "app.js"
+    }, 
+    {
+      "src": "/",
+      "dest": "production-dependencies.js"
     }
   ]
 }
