@@ -13,15 +13,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server.js"
-    }, 
-    {
-      "src": "/",
-      "dest": "dist/app.js"
-    },
-    {
-        "src": "/",
-        "dest": "dist/production-dependencies.js"
+      "dest": "/"
     }
   ]
 }
