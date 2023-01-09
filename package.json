@@ -60,6 +60,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@vercel/node": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
     "phaser": "^3.0.0",
