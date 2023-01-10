@@ -10,7 +10,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "npx-fix": "npx eslint src/  --fix",
-    "start": "node server.js"
+    "start": "node api/server.js"
   },
   "author": "Felipe Enne",
   "license": "MIT",
