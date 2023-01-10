@@ -26,7 +26,7 @@ The final project of Microverse in the Javascript course, using the <a href="htt
 
 In this game we aim to collect the coins while escaping the volcano fire. 
 
-<a href="https://climbing-volcano.herokuapp.com/"> Live version. </a>
+<a href="https://climbing-the-volcano-k1kdpckj8-felipeenne.vercel.app/"> Live version. </a>
 
 ### Built With 
 
