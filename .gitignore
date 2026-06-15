@@ -2,3 +2,6 @@
 node_modules/
 .vscode/
 src/.DS_Store
+
+# Contexto local do Cursor (não versionar)
+.cursor/
