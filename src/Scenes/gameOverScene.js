@@ -70,15 +70,4 @@ export default class gameOverScene extends Phaser.Scene {
       }
     });
   }
-
-  ready() {
-    this.load.on("complete", () => {
-      this.gameOverhistory.destroy();
-      this.gameOverGold.destroy();
-      this.gameOverButton.destroy();
-      this.optionsOverButton.destroy();
-      this.element.destroy();
-      this.ready();
-    });
-  }
 }

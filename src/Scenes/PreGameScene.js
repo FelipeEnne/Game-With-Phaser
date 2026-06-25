@@ -50,50 +50,49 @@ export default class PreGameScene extends Phaser.Scene {
     this.gameContext2.setY(450);
     this.gameContext3.setY(500);
 
-    this.creditsTween = this.tweens.add({
+    this.titleTween = this.tweens.add({
       targets: this.title,
       y: -250,
       ease: "Power1",
       duration: 8000,
       delay: 5000,
-      onComplete() {
-        this.destroy;
+      onComplete: () => {
+        this.title.destroy();
       },
     });
 
-    this.madeByTween = this.tweens.add({
+    this.context1Tween = this.tweens.add({
       targets: this.gameContext1,
       y: -150,
       ease: "Power1",
       duration: 8000,
       delay: 5000,
-      onComplete() {
-        this.destroy;
+      onComplete: () => {
+        this.gameContext1.destroy();
       },
     });
 
-    this.madeByTween = this.tweens.add({
+    this.context2Tween = this.tweens.add({
       targets: this.gameContext2,
       y: -100,
       ease: "Power1",
       duration: 8000,
       delay: 5000,
-      onComplete() {
-        this.destroy;
+      onComplete: () => {
+        this.gameContext2.destroy();
       },
     });
 
-    this.madeByTween = this.tweens.add({
+    this.context3Tween = this.tweens.add({
       targets: this.gameContext3,
       y: -50,
       ease: "Power1",
       duration: 8000,
       delay: 5000,
-      // eslint-disable-next-line func-names
-      onComplete: function () {
-        this.madeByTween.destroy;
+      onComplete: () => {
+        this.context3Tween.destroy();
         this.scene.start("Game");
-      }.bind(this),
+      },
     });
   }
 }
