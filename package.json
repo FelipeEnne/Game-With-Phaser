@@ -37,7 +37,6 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/runtime": "^7.29.7",
     "babel-jest": "^29.7.0",
-    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.11.0",
     "eslint": "^8.40.0",
     "eslint-plugin-import": "^2.32.0",
@@ -48,8 +47,10 @@
     "raw-loader": "^4.0.2",
     "style-loader": "^3.3.4",
     "webpack": "^5.107.2",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.2"
+    "webpack-cli": "^5.1.4"
+  },
+  "overrides": {
+    "js-yaml": "^4.2.0"
   },
   "dependencies": {
     "express": "^4.22.2",
