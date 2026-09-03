@@ -53,7 +53,7 @@
     "js-yaml": "^4.2.0"
   },
   "dependencies": {
-    "express": "^4.22.2",
+    "express": "^5.2.1",
     "node-fetch": "^3.3.2",
     "phaser": "^3.60.0"
   },
