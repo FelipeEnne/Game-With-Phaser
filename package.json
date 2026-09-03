@@ -50,7 +50,8 @@
     "webpack-cli": "^5.1.4"
   },
   "overrides": {
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.2.0",
+    "qs": "^6.16.0"
   },
   "dependencies": {
     "express": "^4.22.2",

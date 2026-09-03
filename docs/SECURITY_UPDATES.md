@@ -186,3 +186,41 @@ git commit -m "docs: document major dependency upgrade plan"
 ```
 
 **Nota:** `dist/app.js` e `dist/production-dependencies.js` foram regenerados pelo build. Avaliar se devem entrar no mesmo commit ou em commit separado.
+
+---
+
+## Rodada 2026-09-03
+
+**Data:** 2026-09-03
+
+### Resumo
+
+| Métrica | Antes | Depois |
+|---------|------:|-------:|
+| Total vulnerabilidades | 6 | 0 |
+| High | 3 | 0 |
+| Moderate | 3 | 0 |
+
+### Correções
+
+| Método | Detalhe |
+|--------|---------|
+| `npm audit fix` (sem `--force`) | `browserslist` ≥4.28.8, `nanoid` ≥3.3.18, `fast-uri` ≥3.1.7 |
+| Override `qs` | `qs@^6.16.0` em `package.json` — evita Express 5 (`npm audit fix --force`) |
+| Override existente | `js-yaml@^4.2.0` mantido |
+| App | `sanitizePlayerName` em `src/boardGold.js` + uso em `gameOverScene.js` (trim, remove control chars, máx. 10) |
+
+### Validação
+
+| Check | Resultado |
+|-------|-----------|
+| `npm audit` | 0 vulnerabilities |
+| `npm run build` | OK (warnings pré-existentes de tamanho/mode) |
+| `npm test` | `mockAPI.test.js` PASS; falhas pré-existentes em localStorage/Phaser |
+
+### Residual (fora desta rodada)
+
+- Plugins rex carregados via CDN em `PreloaderScene.js` (supply chain)
+- Ranking sem autenticação (esperado para o jogo casual)
+- Migração Express 5 não necessária enquanto o override de `qs` cobrir o audit
+

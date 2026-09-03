@@ -1,6 +1,13 @@
 /* eslint-disable import/no-unresolved */
 const fetch = require("node-fetch");
 
+function sanitizePlayerName(name) {
+  return String(name ?? "")
+    .trim()
+    .replace(/[\u0000-\u001F\u007F]/g, "")
+    .substring(0, 10);
+}
+
 async function initGame() {
   const game = {
     name: "Climbing the Volcano",
@@ -24,7 +31,7 @@ async function initGame() {
 
 async function submitGold(Name, Value) {
   const submit = {
-    user: Name,
+    user: sanitizePlayerName(Name),
     score: Value,
   };
   const post = JSON.stringify(submit);
@@ -67,4 +74,4 @@ async function getGoldBoard() {
   return sorting(answer.result);
 }
 
-export { submitGold, getGoldBoard, initGame };
+export { sanitizePlayerName, submitGold, getGoldBoard, initGame };

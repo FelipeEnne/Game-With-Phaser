@@ -2,7 +2,7 @@
 import Phaser from "phaser";
 import Button from "../Objects/Button";
 import { getLocalGolds } from "../localStorage";
-import { submitGold } from "../boardGold";
+import { sanitizePlayerName, submitGold } from "../boardGold";
 
 export default class gameOverScene extends Phaser.Scene {
   constructor() {
@@ -58,10 +58,11 @@ export default class gameOverScene extends Phaser.Scene {
     element.on("click", (event) => {
       if (event.target.name === "submit") {
         const inputText = document.getElementById("Name");
-        if (inputText.value !== "") {
+        const name = sanitizePlayerName(inputText.value);
+        if (name !== "") {
           element.removeListener("click");
           element.setVisible(false);
-          this.Name = inputText.value;
+          this.Name = name;
           this.submit = submitGold(this.Name, gold);
           this.submit.then(() => {
             this.scene.start("Board");
