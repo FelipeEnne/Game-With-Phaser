@@ -224,3 +224,43 @@ git commit -m "docs: document major dependency upgrade plan"
 - Ranking sem autenticação (esperado para o jogo casual)
 - Migração Express 5 não necessária enquanto o override de `qs` cobrir o audit
 
+---
+
+## Rodada 2026-09-15
+
+**Data:** 2026-09-15
+
+### Resumo
+
+| Métrica | Antes | Depois |
+|---------|------:|-------:|
+| Total vulnerabilidades | 1 | 0 |
+| High | 1 | 0 |
+
+### Causa
+
+Novo advisory [GHSA-2883-xcg3-v3hh](https://github.com/advisories/GHSA-2883-xcg3-v3hh) (CVE-2026-84375) em `js-yaml` 4.0.0–4.3.1. O override existente `^4.2.0` ainda permitia resolver 4.3.1.
+
+### Correções
+
+| Método | Detalhe |
+|--------|---------|
+| Override `js-yaml` | `^4.2.0` → `^4.3.2` em `package.json` |
+| `npm install` | Regenerou `package-lock.json` com `js-yaml@4.3.2` |
+| `npm audit fix` (sem `--force`) | Confirmou 0 vulnerabilities |
+| Override existente | `qs@^6.16.0` mantido |
+
+### Validação
+
+| Check | Resultado |
+|-------|-----------|
+| `npm audit` | 0 vulnerabilities |
+| `npm run build` | OK (warnings pré-existentes de tamanho/mode) |
+| `npm test` | `mockAPI.test.js` PASS; falhas pré-existentes em localStorage/Phaser |
+
+### Residual (fora desta rodada)
+
+- Plugins rex carregados via CDN em `PreloaderScene.js` (supply chain)
+- Ranking sem autenticação (esperado para o jogo casual)
+- Migração Express 5 não necessária enquanto o override de `qs` cobrir o audit
+
