@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
-import { localStoreGold, getLocalGolds, storeGolds } from "./mockLocalStorage";
+import { localStoreGold, getLocalGolds, storeGolds } from "../src/localStorage";
+
+beforeEach(() => {
+  localStorage.clear();
+});
 
 describe("Test the localStoreGold - LocalStorage", () => {
   let golds;
