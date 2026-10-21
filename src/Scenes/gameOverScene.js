@@ -47,18 +47,28 @@ export default class gameOverScene extends Phaser.Scene {
     this.userName = "";
 
     const div = document.createElement("div");
-    div.innerHTML = `
-      <input type="text" id="Name" placeholder="Your name" style="font-size: 20px" max="10" min="1"><br>
-      <input type="button" name="submit" value="Submit your Score" style="font-size: 20px">
-    `;
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.id = "Name";
+    nameInput.placeholder = "Your name";
+    nameInput.maxLength = 10;
+    nameInput.autocomplete = "off";
+    nameInput.style.fontSize = "20px";
+
+    const submitButton = document.createElement("input");
+    submitButton.type = "button";
+    submitButton.name = "submit";
+    submitButton.value = "Submit your Score";
+    submitButton.style.fontSize = "20px";
+
+    div.append(nameInput, document.createElement("br"), submitButton);
 
     const element = this.add.dom(600, 300, div);
     element.addListener("click");
 
     element.on("click", (event) => {
       if (event.target.name === "submit") {
-        const inputText = document.getElementById("Name");
-        const name = sanitizePlayerName(inputText.value);
+        const name = sanitizePlayerName(nameInput.value);
         if (name !== "") {
           element.removeListener("click");
           element.setVisible(false);
