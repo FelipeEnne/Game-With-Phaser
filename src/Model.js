@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+
 export default class Model {
   constructor() {
     this._musicOn = true;

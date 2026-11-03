@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+
 import "./assets/style/style.css";
 import Phaser from "phaser";
 import config from "./Config/config";
