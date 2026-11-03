@@ -62,7 +62,7 @@
     "phaser": "^3.60.0"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "repository": "https://github.com/FelipeEnne/Game-With-Phaser.git"
 }

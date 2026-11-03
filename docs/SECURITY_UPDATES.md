@@ -264,3 +264,31 @@ Novo advisory [GHSA-2883-xcg3-v3hh](https://github.com/advisories/GHSA-2883-xcg3
 - Ranking sem autenticação (esperado para o jogo casual)
 - Migração Express 5 não necessária enquanto o override de `qs` cobrir o audit
 
+---
+
+## Aceitação temporária — deepmerge (2026-11-03)
+
+O `npm audit` identifica `deepmerge@4.3.1` como dependência transitiva de
+`jest-config@30.5.2`. O advisory [GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4)
+descreve uma possibilidade de prototype poisoning em objetos retornados por
+`mergeObject()`. No momento do registro, o advisory não lista uma versão
+corrigida; portanto, não há atualização normal de versão para aplicar.
+
+### Decisão e escopo
+
+- Aceitamos temporariamente este alerta de severidade baixa enquanto não houver
+  uma versão corrigida mantida pelo upstream.
+- A dependência está na cadeia de ferramentas de teste/desenvolvimento e não é
+  incluída nas dependências de produção do jogo (`npm audit --omit=dev` não
+  encontrou vulnerabilidades).
+- Não foi identificado uso de `deepmerge` no código da aplicação. Essa análise
+  reduz a exposição conhecida, mas não é uma garantia de que o cenário descrito
+  seja impossível durante tarefas de desenvolvimento.
+- Não adicionar override ou marcar o pacote como corrigido: isso ocultaria o
+  alerta sem aplicar uma correção verificável.
+
+### Reavaliação
+
+Reavaliar quando o upstream publicar uma versão corrigida ou quando o advisory
+mudar. Até lá, manter o lockfile e acompanhar a auditoria antes de releases.
+
